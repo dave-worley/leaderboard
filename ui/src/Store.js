@@ -1,22 +1,42 @@
 import React from 'react';
+import { uniqid } from "./helpers";
 
 export const Store = React.createContext({});
 
 const STATENAME = 'LeaderboardInitialState';
 
 if (!localStorage.getItem(STATENAME)) {
-  localStorage.setItem(STATENAME, {
-    players: [],
+  localStorage.setItem(STATENAME, JSON.stringify({
+    players: [
+      {
+        lastName: 'Worley',
+        firstName: 'David',
+        score: 100,
+        id: uniqid()
+      },
+      {
+        lastName: 'Worley',
+        firstName: 'David',
+        score: 100,
+        id: uniqid()
+      },
+      {
+        lastName: 'Worley',
+        firstName: 'David',
+        score: 100,
+        id: uniqid()
+      }
+    ],
     editPlayerId: '',
-    addPlayerFormVisible: false,
+    playerFormVisible: false,
     error: null
-  });
+  }));
 }
 
 function reducer(state, action) {
   switch (action.type) {
     case 'ADD_PLAYER':
-      return { ...state, players: state.players.concat(action.payload) };
+      return { ...state, players: state.players.concat(Object.assign(action.payload, { id: uniqid() })) };
     case 'REMOVE_PLAYER':
       return { ...state, players: state.players.filter((player) => {
           return action.payload.id !== player.id;
@@ -36,7 +56,7 @@ function reducer(state, action) {
     case 'TOGGLE_PLAYER_FORM':
       return {
         ...state,
-        addPlayerFormVisible: action.payload
+        playerFormVisible: action.payload,
       };
     case 'ERROR':
       return {
@@ -44,7 +64,7 @@ function reducer(state, action) {
         error: action.payload
       };
     case 'STORE_STATE':
-      localStorage.setItem(STATENAME, state);
+      localStorage.setItem(STATENAME, JSON.stringify(state));
       return state;
     default:
       return state;
@@ -52,7 +72,8 @@ function reducer(state, action) {
 }
 
 export function StoreProvider(props) {
-  const [state, dispatch] = React.useReducer(reducer, localStorage.getItem(STATENAME));
+  const initialState = JSON.parse(localStorage.getItem(STATENAME));
+  const [state, dispatch] = React.useReducer(reducer, initialState);
   const value = { state, dispatch };
   return (<Store.Provider value={ value }>
     {props.children}

@@ -28,7 +28,7 @@ export const updateScore = (dispatch, player) => {
 
 export const togglePlayerForm = (dispatch, isVisible) => {
   return dispatch({
-    type: 'TOGGLE_UPLOAD_FORM',
+    type: 'TOGGLE_PLAYER_FORM',
     payload: !isVisible
   });
 };
@@ -37,5 +37,12 @@ export const storeState = (dispatch) => {
   return dispatch({
     type: 'STORE_STATE',
     payload: null
+  });
+};
+
+export const reportError = (dispatch, error) => {
+  return dispatch({
+    type: 'ERROR',
+    payload: error
   });
 };
