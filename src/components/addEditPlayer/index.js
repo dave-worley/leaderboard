@@ -7,7 +7,7 @@ import './style.css';
 export default () => {
   const { state, dispatch } = React.useContext(Store);
   let player;
-  if (state.editPlayerId) {
+  if (state && state.editPlayerId) {
     player = state.players.find((p) => p.id === state.editPlayerId);
   }
   return (
