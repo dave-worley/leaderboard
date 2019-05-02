@@ -37,9 +37,9 @@ export default () => {
           }
         }
         if (a.score > b.score) {
-          return -1;
-        } else if (a.score < b.score) {
           return 1;
+        } else if (a.score < b.score) {
+          return -1;
         }
         return 0;
       }).map((player, i) => {
