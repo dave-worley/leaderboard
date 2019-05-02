@@ -41,6 +41,13 @@ export const storeState = (dispatch) => {
 };
 
 export const reportError = (dispatch, error) => {
+  // only display the error for a few seconds
+  setTimeout(() => {
+    dispatch({
+      type: 'ERROR',
+      payload: null
+    });
+  }, 5 * 1000);
   return dispatch({
     type: 'ERROR',
     payload: error

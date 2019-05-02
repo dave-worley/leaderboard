@@ -1,5 +1,5 @@
 import React from 'react';
-import { togglePlayerForm, addPlayer, reportError } from "../../actions";
+import { togglePlayerForm, addPlayer, reportError, storeState } from "../../actions";
 import { Store } from "../../Store";
 
 export default ({ player }) => {
@@ -19,6 +19,7 @@ export default ({ player }) => {
     evt.preventDefault();
     if (playerData.firstName && playerData.lastName) {
       addPlayer(dispatch, playerData);
+      storeState(dispatch);
     } else {
       reportError(dispatch, new Error('The player needs a first & last name.'))
     }

@@ -2,6 +2,11 @@
     border: 3px solid red;
     color: red;
     background-color: white;
+    opacity: 1;
+    transition: opacity 1s;
+}
+.error.hide {
+    opacity: 0;
 }
 .error .content {
     padding: 1rem;

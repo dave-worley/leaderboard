@@ -11,7 +11,7 @@ import { togglePlayerForm } from "./actions";
 export default () => {
   const { state, dispatch } = React.useContext(Store);
   return (<div className='App'>
-    { state.error && <ErrorDisplay>{ state.error }</ErrorDisplay> }
+    { state.error && <ErrorDisplay>{ state.error.message }</ErrorDisplay> }
     <Leaderboard/>
     <AddPlayer dispatch={ dispatch }/>
     <Button action={
