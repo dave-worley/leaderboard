@@ -1,0 +1,18 @@
+.formRow {
+    text-align: left;
+    border-bottom: 1px dotted #ccc;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.formRow label {
+    display: inline-block;
+    text-align: right;
+    width: 35%;
+    margin-right: 1rem;
+}
+input:read-only {
+    background-color: #ccc;
+    border: 0 none;
+    padding: 0.25rem;
+    pointer-events: none;
+}

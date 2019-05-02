@@ -5,7 +5,7 @@ import ErrorDisplay from './components/errorDisplay';
 import Leaderboard from './components/leaderboard';
 import AddEditPlayer from './components/addEditPlayer';
 import Button from './components/button';
-import { togglePlayerForm } from "./actions";
+import { setPlayerId, togglePlayerForm } from "./actions";
 
 
 export default () => {
@@ -15,9 +15,12 @@ export default () => {
     <h1>Leaderboard</h1>
     <Leaderboard/>
     <div className='addPlayer'>
-      <AddEditPlayer dispatch={ dispatch }/>
+      <AddEditPlayer />
       <Button action={
-        () => togglePlayerForm(dispatch, state.playerFormVisible)
+        () => {
+          setPlayerId(dispatch, null);
+          togglePlayerForm(dispatch, state.playerFormVisible);
+        }
       }>Add Player</Button>
     </div>
   </div>);
