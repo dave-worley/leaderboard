@@ -6,6 +6,10 @@ import './style.css';
 
 export default () => {
   const { state, dispatch } = React.useContext(Store);
+  let player;
+  if (state.editPlayerId) {
+    player = state.players.find((p) => p.id === state.editPlayerId);
+  }
   return (
     state && state.playerFormVisible &&
     <div
@@ -15,7 +19,7 @@ export default () => {
           togglePlayerForm(dispatch, state.playerFormVisible);
         }
       } }>
-      <PlayerForm />
+      <PlayerForm player={ player } />
     </div>
   );
 }

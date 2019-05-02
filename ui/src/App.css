@@ -3,6 +3,11 @@
   max-width: 960px;
   margin: 0 auto;
 }
+h1 {
+  text-align: center;
+  margin: 0;
+  padding: 1rem;
+}
 .addPlayer {
   text-align: center;
   padding: 1rem;

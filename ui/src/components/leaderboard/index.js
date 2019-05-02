@@ -1,6 +1,6 @@
 import React from 'react';
 import { Store } from "../../Store";
-import { removePlayer, storeState } from "../../actions";
+import { removePlayer, storeState, togglePlayerForm, setPlayerId } from "../../actions";
 import Button from '../button';
 import './style.css';
 
@@ -11,6 +11,10 @@ export default () => {
       removePlayer(dispatch, player);
       storeState(dispatch);
     }
+  };
+  const updateScoreHandler = (player) => {
+    setPlayerId(dispatch, player.id);
+    togglePlayerForm(dispatch, state.playerFormVisible);
   };
   return (
     <table>
@@ -42,7 +46,10 @@ export default () => {
         return (<tr key={ player.id } className={ i%2 === 0 ? 'stripe' : '' }>
           <td>{ player.lastName }, { player.firstName }</td>
           <td>{ player.score }</td>
-          <td className='actions'><Button>update score</Button><Button action={ () => removePlayerHandler(player) }>delete</Button></td>
+          <td className='actions'>
+            <Button action={ () => updateScoreHandler(player) }>update score</Button>
+            <Button action={ () => removePlayerHandler(player) }>delete</Button>
+          </td>
         </tr>);
       }) }
       </tbody>

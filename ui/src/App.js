@@ -12,6 +12,7 @@ export default () => {
   const { state, dispatch } = React.useContext(Store);
   return (<div className='App'>
     { state.error && <ErrorDisplay>{ state.error.message }</ErrorDisplay> }
+    <h1>Leaderboard</h1>
     <Leaderboard/>
     <div className='addPlayer'>
       <AddPlayer dispatch={ dispatch }/>

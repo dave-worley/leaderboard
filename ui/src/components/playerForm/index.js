@@ -1,5 +1,5 @@
 import React from 'react';
-import { togglePlayerForm, addPlayer, reportError, storeState } from "../../actions";
+import { togglePlayerForm, addPlayer, reportError, storeState, updateScore } from "../../actions";
 import { Store } from "../../Store";
 
 export default ({ player }) => {
@@ -19,7 +19,11 @@ export default ({ player }) => {
     evt.preventDefault();
     if (playerData.firstName && playerData.lastName) {
       playerData.score = parseInt(playerData.score);
-      addPlayer(dispatch, playerData);
+      if (!player) {
+        addPlayer(dispatch, playerData);
+      } else {
+        updateScore(dispatch, playerData);
+      }
       storeState(dispatch);
     } else {
       reportError(dispatch, new Error('The player needs a first & last name.'))
@@ -32,7 +36,7 @@ export default ({ player }) => {
       <label htmlFor=''>First Name</label><input name='firstName' type='text' defaultValue={ playerData.firstName }/>
       <label htmlFor=''>Last Name</label><input name='lastName' type='text' defaultValue={ playerData.lastName }/>
       <label htmlFor=''>Score</label><input name='score' type='text' defaultValue={ playerData.score }/>
-      <button>Add Player</button>
+      <button>{ player ? 'Edit' : 'Add' } Player</button>
     </form>
   );
 };
