@@ -13,9 +13,11 @@ export default () => {
   return (<div className='App'>
     { state.error && <ErrorDisplay>{ state.error.message }</ErrorDisplay> }
     <Leaderboard/>
-    <AddPlayer dispatch={ dispatch }/>
-    <Button action={
-      () => togglePlayerForm(dispatch, state.playerFormVisible)
-    }>Add Player</Button>
+    <div className='addPlayer'>
+      <AddPlayer dispatch={ dispatch }/>
+      <Button action={
+        () => togglePlayerForm(dispatch, state.playerFormVisible)
+      }>Add Player</Button>
+    </div>
   </div>);
 }

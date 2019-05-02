@@ -18,6 +18,7 @@ export default ({ player }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (playerData.firstName && playerData.lastName) {
+      playerData.score = parseInt(playerData.score);
       addPlayer(dispatch, playerData);
       storeState(dispatch);
     } else {

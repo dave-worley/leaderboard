@@ -3,7 +3,7 @@ import { shallow } from '../../enzyme';
 
 import UploadFile from '.';
 
-describe('ListUploads Test', () => {
+describe('Add Player Test', () => {
 
   it('renders', () => {
     const wrapper = shallow(<UploadFile />);

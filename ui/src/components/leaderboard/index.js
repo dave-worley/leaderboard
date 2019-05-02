@@ -2,23 +2,49 @@ import React from 'react';
 import { Store } from "../../Store";
 import { removePlayer, storeState } from "../../actions";
 import Button from '../button';
+import './style.css';
 
 export default () => {
   const { state, dispatch } = React.useContext(Store);
   const removePlayerHandler = (player) => {
-    removePlayer(dispatch, player);
-    storeState(dispatch);
+    if (window.confirm('Really delete this user? This action cannot be undone.')) {
+      removePlayer(dispatch, player);
+      storeState(dispatch);
+    }
   };
   return (
     <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+        <th></th>
+      </tr>
+      </thead>
       <tbody>
-        { state.players.map((player) => {
-          return (<tr key={ player.id }>
-            <td>{ player.lastName }, { player.firstName }</td>
-            <td>{ player.score }</td>
-            <td><Button>update score</Button><Button action={ () => removePlayerHandler(player) }>delete</Button></td>
-          </tr>);
-        }) }
+      { state.players.sort((a, b) => {
+        if (a.score === b.score) {
+          const aName = `${ a.lastName }, ${ a.firstName }`;
+          const bName = `${ b.lastName }, ${ b.firstName }`;
+          if (aName > bName) {
+            return 1;
+          } else {
+            return -1;
+          }
+        }
+        if (a.score > b.score) {
+          return -1;
+        } else if (a.score < b.score) {
+          return 1;
+        }
+        return 0;
+      }).map((player, i) => {
+        return (<tr key={ player.id } className={ i%2 === 0 ? 'stripe' : '' }>
+          <td>{ player.lastName }, { player.firstName }</td>
+          <td>{ player.score }</td>
+          <td className='actions'><Button>update score</Button><Button action={ () => removePlayerHandler(player) }>delete</Button></td>
+        </tr>);
+      }) }
       </tbody>
     </table>
   );

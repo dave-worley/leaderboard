@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+}
+tr td,
+th {
+    background-color: white;
+}
+tr.stripe td {
+    background-color: #efefef;
+}
+td.actions {
+    text-align: right;
+}
+td button {
+    margin-left: 1rem;
+}

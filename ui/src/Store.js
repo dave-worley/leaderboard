@@ -72,7 +72,7 @@ function reducer(state, action) {
 }
 
 export function StoreProvider(props) {
-  const initialState = JSON.parse(localStorage.getItem(STATENAME));
+  const initialState = Object.assign(JSON.parse(localStorage.getItem(STATENAME)), { playerFormVisible: false });
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const value = { state, dispatch };
   return (<Store.Provider value={ value }>
